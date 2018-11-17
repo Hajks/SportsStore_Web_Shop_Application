@@ -7,6 +7,7 @@ using Ninject;
 using Moq;
 using SportsStore_Web_Shop_Application.Domain.Entities;
 using SportsStore_Web_Shop_Application.Domain.Abstract;
+using SportsStore_Web_Shop_Application.Domain.Concrete;
 
 namespace SportsStore_Web_Shop_Application.WebUI.Infrastructure
 {
@@ -24,7 +25,7 @@ namespace SportsStore_Web_Shop_Application.WebUI.Infrastructure
 
         public object GetService(Type serviceType)
         {
-            return kernel.GetService(serviceType);
+            return kernel.TryGet(serviceType);
         }
 
         public IEnumerable<object> GetServices(Type serviceType)
@@ -34,15 +35,18 @@ namespace SportsStore_Web_Shop_Application.WebUI.Infrastructure
 
         public void AddBindings()
         {
-            Mock<IProductRepository> mock = new Mock<IProductRepository>();
-            mock.Setup(m => m.Products).Returns(new List<Product>()
-            {
-                new Product {Name = "Piłka nożna", Price = 25},
-                new Product {Name = "Deska surfingowa", Price = 179},
-                new Product {Name = "Buty do biegania", Price = 95}
-            });
 
-            kernel.Bind<IProductRepository>().ToConstant(mock.Object);
+            kernel.Bind<IProductRepository>().To<EFProductRepository>();
+
+            //Mock<IProductRepository> mock = new Mock<IProductRepository>();
+            //mock.Setup(m => m.Products).Returns(new List<Product>()
+            //{
+            //    new Product {Name = "Piłka nożna", Price = 25},
+            //    new Product {Name = "Deska surfingowa", Price = 179},
+            //    new Product {Name = "Buty do biegania", Price = 95}
+            //});
+
+            //kernel.Bind<IProductRepository>().ToConstant(mock.Object);
         }
     }
 }
