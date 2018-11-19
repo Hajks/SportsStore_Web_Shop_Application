@@ -6,10 +6,10 @@ using SportsStore_Web_Shop_Application.Domain.Entities;
 
 namespace SportsStore_Web_Shop_Application.WebUI.Models
 {
-    public class ProductListViewModel
+    public class CartIndexViewModel
     {
-        public IEnumerable<Product> Products { get; set; }
-        public PagingInfo PagingInfo { get; set; }
-        public string CurrentCategory { get; set; }
+        public Cart Cart { get; set; }
+        public string ReturnUrl { get; set; }
+
     }
 }

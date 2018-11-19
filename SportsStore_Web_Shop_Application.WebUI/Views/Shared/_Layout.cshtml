@@ -9,11 +9,11 @@
 <body>
 <div>
     <div class="navbar navbar-inverse" role="navigation">
-        <a class="navbar-brand" href ="#">Sklep "jakiś/marka/cokolwiek"</a>
+        <a class="navbar-brand" href ="#">Sklep sportowy</a>
     </div>
     <div class="row panel"></div>
     <div id="categories" class="col-xs-3">
-        Dodać panel
+        @Html.Action("Menu", "Nav")
     </div>
     <div class="col-xs-8">
         @RenderBody()
