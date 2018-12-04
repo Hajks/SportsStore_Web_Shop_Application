@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Ninject;
 using Moq;
 using SportsStore_Web_Shop_Application.Domain.Entities;
+using System.Configuration;
 using SportsStore_Web_Shop_Application.Domain.Abstract;
 using SportsStore_Web_Shop_Application.Domain.Concrete;
 
@@ -37,6 +38,14 @@ namespace SportsStore_Web_Shop_Application.WebUI.Infrastructure
         {
 
             kernel.Bind<IProductRepository>().To<EFProductRepository>();
+
+            EmailSettings emailSettings = new EmailSettings()
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager.AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+
+
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>().WithConstructorArgument("settings", emailSettings);
 
             //Mock<IProductRepository> mock = new Mock<IProductRepository>();
             //mock.Setup(m => m.Products).Returns(new List<Product>()

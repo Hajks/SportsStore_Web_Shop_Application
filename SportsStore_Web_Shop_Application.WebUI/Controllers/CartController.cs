@@ -15,6 +15,8 @@ namespace SportsStore_Web_Shop_Application.WebUI.Controllers
             repository = repo;
         }
 
+   
+
         public ViewResult Index(Cart cart, string returnUrl)
         {
             return View(new CartIndexViewModel
@@ -51,6 +53,11 @@ namespace SportsStore_Web_Shop_Application.WebUI.Controllers
         public PartialViewResult Summary(Cart cart)
         {
             return PartialView(cart);
+        }
+
+        public ViewResult Checkout()
+        {
+            return View(new ShippingDetails());
         }
 
     }
