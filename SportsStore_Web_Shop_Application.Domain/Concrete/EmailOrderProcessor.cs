@@ -12,15 +12,15 @@ namespace SportsStore_Web_Shop_Application.Domain.Concrete
 {
         public class EmailSettings
         {
-            public string MailToAddress = "mojmail";
-            public string MailFromAdress = "domenaadres";
+            public string MailToAddress = "test12395test@gmail.com";
+            public string MailFromAdress = "test12395test@gmail.com";
             public bool UseSsl = true;
-            public string Username = "usersmtp";
-            public string Password = "Haslosmtp";
-            public string ServerName = "smtp.przyklad.pl";
+            public string Username = "test12395test@gmail.com";
+            public string Password = "test12395";
+            public string ServerName = "smtp.gmail.com";
             public int ServerPort = 587;
             public bool WriteAsFile = false;
-            public string FileLocation = @"c:\sports_store_emails";
+            public string FileLocation = @"D:\Test";
         }
 
         public class EmailOrderProcessor : IOrderProcessor
@@ -83,7 +83,7 @@ namespace SportsStore_Web_Shop_Application.Domain.Concrete
 
                     if (emailSettings.WriteAsFile)
                     {
-                        mailMessage.BodyEncoding = Encoding.ASCII;
+                        
                     }
 
                     smtpClient.Send(mailMessage);

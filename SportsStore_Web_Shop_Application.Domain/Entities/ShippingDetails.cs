@@ -20,7 +20,7 @@ namespace SportsStore_Web_Shop_Application.Domain.Entities
         [Display(Name = "Wiersz 3")]
         public string Line3 { get; set; }
 
-        [Required(ErrorMessage = "Proszę podać nazwę województwa")]
+        [Required(ErrorMessage = "Proszę podać nazwę miasta")]
         [Display(Name = "Miasto")]
         public string City { get; set; }
 
