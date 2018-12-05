@@ -83,7 +83,7 @@ namespace SportsStore_Web_Shop_Application.Domain.Concrete
 
                     if (emailSettings.WriteAsFile)
                     {
-                        
+                        mailMessage.BodyEncoding = Encoding.ASCII;
                     }
 
                     smtpClient.Send(mailMessage);
