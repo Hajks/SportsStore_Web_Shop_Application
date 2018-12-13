@@ -180,6 +180,5 @@ namespace SportsStore_Web_Shop_Application.UnitTests
             Assert.AreEqual(resAll, 5);
 
         }
-
     }
 }
