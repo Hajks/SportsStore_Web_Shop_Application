@@ -18,7 +18,7 @@ namespace SportsStore_Web_Shop_Application.Domain.Concrete
         public DbSet<Product> Products { get; set; }
     }
 
-    public class DataBaseInitializer : DropCreateDatabaseAlways<EFDbContext>
+    public class DataBaseInitializer : CreateDatabaseIfNotExists<EFDbContext>
     {
         protected override void Seed(EFDbContext db)
         {
