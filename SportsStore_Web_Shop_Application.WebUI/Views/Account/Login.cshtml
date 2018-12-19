@@ -1,0 +1,33 @@
+﻿@model SportsStore_Web_Shop_Application.WebUI.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Administracja: Logowanie";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/signin.css" rel="stylesheet"/>
+
+
+<body class="text-center">
+<div class="panel">
+    <div class="panel-heading">
+        <h3>Zaloguj się</h3>
+    </div>
+    <div class="panel-body">
+        <p class="lead">Proszę się zalogować, aby uzyskać dostęp do obszaru administracyjnego:</p>
+        @using (Html.BeginForm())
+        {
+            @Html.ValidationSummary(false, "", new {@class = "text-danger"})
+            <div class="form-group">
+                <label>Nazwa użytkownika:</label>
+                @Html.TextBoxFor(m => m.UserName, new {@class= "form-control", placeholder = "Nazwa użytkownika"})
+            </div>
+            <div class="form-group">
+                <label> Hasło:</label>
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Hasło"})
+            </div>
+            <input type="submit" value="Zaloguj sie" class="btn btn-primary"/>
+        }
+    </div>
+</div>
+</body>

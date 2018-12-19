@@ -9,6 +9,8 @@ using Moq;
 using SportsStore_Web_Shop_Application.Domain.Abstract;
 using SportsStore_Web_Shop_Application.Domain.Entities;
 using SportsStore_Web_Shop_Application.WebUI.Controllers;
+using SportsStore_Web_Shop_Application.WebUI.Infrastructure.Abstract;
+using SportsStore_Web_Shop_Application.WebUI.Models;
 
 namespace SportsStore_Web_Shop_Application.UnitTests
 {
@@ -131,5 +133,36 @@ namespace SportsStore_Web_Shop_Application.UnitTests
             mock.Verify(m => m.DeleteProduct(prod.ProductID));
         }
 
-}
+        [TestMethod]
+        public void Can_Login_With_Valid_Credentials()
+        {
+            Mock<IAuthProvider> mock = new Mock<IAuthProvider>();
+            mock.Setup(m => m.Authenticate("admin", "test1234")).Returns(true);
+
+            LoginViewModel model = new LoginViewModel {UserName = "admin", Password = "test1234"};
+
+            AccountController target = new AccountController(mock.Object);
+
+            ActionResult result = target.Login(model, "/MyURL");
+
+            Assert.IsInstanceOfType(result, typeof(RedirectResult));
+            Assert.AreEqual("/MyURL", ((RedirectResult) result).Url);
+        }
+
+        [TestMethod]
+        public void Cannot_Login_With_Invalid_Credentials()
+        {
+            Mock<IAuthProvider> mock = new Mock<IAuthProvider>();
+            mock.Setup(m => m.Authenticate("badUsername", "badPassword"));
+
+            LoginViewModel model = new LoginViewModel {UserName = "admin", Password = "test1234"};
+
+            AccountController target = new AccountController(mock.Object);
+
+            ActionResult result = target.Login(model, "/MyURL");
+
+            Assert.IsInstanceOfType(result, typeof(ViewResult));
+            Assert.IsFalse(((ViewResult)result).ViewData.ModelState.IsValid);
+        }
+    }
 }

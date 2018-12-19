@@ -8,6 +8,7 @@ using SportsStore_Web_Shop_Application.Domain.Entities;
 
 namespace SportsStore_Web_Shop_Application.WebUI.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
        private IProductRepository repository;
@@ -29,16 +30,26 @@ namespace SportsStore_Web_Shop_Application.WebUI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, HttpPostedFileBase image = null)
         {
             if (ModelState.IsValid)
             {
+                {
+                    if (image != null)
+                    {
+                        product.ImageMimeType = image.ContentType;
+                        product.ImageData = new byte[image.ContentLength];
+                        image.InputStream.Read(product.ImageData, 0, image.ContentLength);
+                    }
+                }
                 repository.SaveProduct(product);
                 TempData["Message"] = string.Format("Zapisano {0}", product.Name);
                 return RedirectToAction(("Index"));
             }
-            else
-            {
+        
+        else
+
+        {
                 //bład
                 return View(product);
             }

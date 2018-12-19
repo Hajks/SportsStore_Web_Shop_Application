@@ -9,6 +9,8 @@ using SportsStore_Web_Shop_Application.Domain.Entities;
 using System.Configuration;
 using SportsStore_Web_Shop_Application.Domain.Abstract;
 using SportsStore_Web_Shop_Application.Domain.Concrete;
+using SportsStore_Web_Shop_Application.WebUI.Infrastructure.Abstract;
+using SportsStore_Web_Shop_Application.WebUI.Infrastructure.Concrete;
 
 namespace SportsStore_Web_Shop_Application.WebUI.Infrastructure
 {
@@ -46,6 +48,8 @@ namespace SportsStore_Web_Shop_Application.WebUI.Infrastructure
 
 
             kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>().WithConstructorArgument("settings", emailSettings);
+
+            kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
 
             //Mock<IProductRepository> mock = new Mock<IProductRepository>();
             //mock.Setup(m => m.Products).Returns(new List<Product>()
