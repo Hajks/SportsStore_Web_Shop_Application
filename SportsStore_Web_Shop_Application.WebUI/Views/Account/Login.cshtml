@@ -5,29 +5,37 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<link href="~/Content/signin.css" rel="stylesheet"/>
+<link href="~/Content/animate.css" rel="stylesheet" />
+<link href="~/Content/signin.css" rel="stylesheet" />
+
 
 
 <body class="text-center">
-<div class="panel">
-    <div class="panel-heading">
-        <h3>Zaloguj się</h3>
+
+    <div class="form-signin">
+        <div class="slide-top ">
+            <img class="mb-4" src="https://i.imgur.com/eh40JGn.png" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Zaloguj się</h1>
+
+            @using (Html.BeginForm()) 
+            {
+
+                        @Html.ValidationSummary()
+
+                @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Nazwa użytkownika", required = "required" })
+
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Hasło", required = "required" })
+
+                <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Zapamiętaj mnie
+                    </label>
+                </div>
+                <input type="submit" value="Zaloguj się" class="btn btn-lg btn-primary btn-block" />
+                <p class="mt-5 mb-3 text-muted">&copy; Piotr Tuński @DateTime.Now.Year.ToString()</p>
+            }
+
+        </div>
     </div>
-    <div class="panel-body">
-        <p class="lead">Proszę się zalogować, aby uzyskać dostęp do obszaru administracyjnego:</p>
-        @using (Html.BeginForm())
-        {
-            @Html.ValidationSummary(false, "", new {@class = "text-danger"})
-            <div class="form-group">
-                <label>Nazwa użytkownika:</label>
-                @Html.TextBoxFor(m => m.UserName, new {@class= "form-control", placeholder = "Nazwa użytkownika"})
-            </div>
-            <div class="form-group">
-                <label> Hasło:</label>
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Hasło"})
-            </div>
-            <input type="submit" value="Zaloguj sie" class="btn btn-primary"/>
-        }
-    </div>
-</div>
 </body>
+
